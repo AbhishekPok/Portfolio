@@ -1,0 +1,93 @@
+import React from 'react';
+import GlassCard from '../components/GlassCard';
+import { Server, Container, Workflow, Cloud, ExternalLink, Github } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const Projects = () => {
+    const projects = [
+        {
+            title: "Vagrant Multi-VM Setup",
+            description: "Automated provisioning of WordPress and MySQL servers using shell scripts. Demonstrates Infrastructure as Code principles.",
+            tags: ["Vagrant", "Bash", "VirtualBox", "Linux"],
+            icon: <Server className="text-blue-400" size={24} />,
+            link: "#"
+        },
+        {
+            title: "Docker Compose Stack",
+            description: "Full-stack application deployment with Django DRF backend and React frontend. Features multi-stage builds and optimized images.",
+            tags: ["Docker", "Django", "React", "Nginx"],
+            icon: <Container className="text-green-400" size={24} />,
+            link: "#"
+        },
+        {
+            title: "CI/CD Pipelines",
+            description: "Comprehensive GitHub Actions workflows for automated testing, linting, and deployment to staging environments.",
+            tags: ["GitHub Actions", "YAML", "Testing", "Automation"],
+            icon: <Workflow className="text-purple-400" size={24} />,
+            link: "#"
+        },
+        {
+            title: "Kubernetes Concepts",
+            description: "Collection of K8s manifests demonstrating Deployments, Services, Ingress, and ConfigMaps for microservices.",
+            tags: ["Kubernetes", "Minikube", "Helm", "Microservices"],
+            icon: <Cloud className="text-sky-400" size={24} />,
+            link: "#"
+        }
+    ];
+
+    return (
+        <section id="projects" className="py-20 bg-white relative">
+            <div className="container mx-auto px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl font-bold mb-4">DevOps <span className="text-primary">Projects</span></h2>
+                    <p className="text-gray-600 max-w-2xl mx-auto">
+                        Practical implementations of infrastructure automation, containerization, and orchestration.
+                    </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                    {projects.map((project, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <GlassCard className="h-full border-t-4 border-t-primary/50 hover:border-t-primary transition-colors group">
+                                <div className="flex justify-between items-start mb-4">
+                                    <div className="p-3 bg-gray-50 rounded-lg group-hover:bg-blue-50 transition-colors">
+                                        {project.icon}
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <a href={project.link} className="p-2 text-gray-400 hover:text-primary transition-colors">
+                                            <Github size={20} />
+                                        </a>
+                                        <a href={project.link} className="p-2 text-gray-400 hover:text-primary transition-colors">
+                                            <ExternalLink size={20} />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                                <p className="text-gray-600 mb-6 line-clamp-3">
+                                    {project.description}
+                                </p>
+
+                                <div className="flex flex-wrap gap-2 mt-auto">
+                                    {project.tags.map((tag, i) => (
+                                        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </GlassCard>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Projects;
